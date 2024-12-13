@@ -1,95 +1,74 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import AutoPlayVideo, { VideoType } from "./components/AutoPlayVideo";
+import { loadEnvConfig } from '@next/env'
+import { S3Conf } from "./hooks/useS3Source";
+import { AnimationBackground } from "./components/AnimationBackground";
+import { AutoChange } from "./components/AutoChange";
+import { ManualChange } from "./hooks/useCurrentFeature";
 
+declare global {
+  interface Window {
+    manualChange: ManualChange;
+  }
+}
+
+const projectDir = process.cwd()
+loadEnvConfig(projectDir)
+
+
+const getManualChangeFunc = (manualChange: ManualChange) => {
+  window.manualChange = manualChange;
+}
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const s3Conf: S3Conf = {
+    region: process.env.NEXT_REGION as string,
+    bucketName: process.env.NEXT_BUCKET_NAME as string,
+    accessKeyId: process.env.NEXT_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.NEXT_SECRET_ACCESS as string
+  };
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+  const handleAutoChange = (feature: VideoType) => {
+    console.log(feature);
+  }
+
+  return (
+    <div style={{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-around',
+      height: '100vh',
+      width: '100vw',
+      color: '#000'
+    }}>
+      <AnimationBackground />
+      <div>
+        <h1 style={{
+          fontSize: '6rem',
+          fontWeight: 'bold'
+        }}>Freezer Note</h1>
+        <h3>
+          Provides a new recognition method, it can be more accurate can be extracted
+        </h3>
+        <h3>
+          from the text of the food package expiration time
+        </h3>
+        <h3>
+          preservation method and production date.
+        </h3>
+      </div>
+      <AutoPlayVideo filename="ticket" s3Conf={s3Conf} />
+      <div>
+        <div style={{
+        }}>
+          <h2>Features</h2>
+          <ul>
+            <li>Keep track of your groceries</li>
+            <li>Get notified when your groceries are running low</li>
+            <li>Get notified when your groceries are expiring</li>
+          </ul>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <AutoChange onChange={handleAutoChange} setManageChange={getManualChangeFunc} />
     </div>
   );
 }
