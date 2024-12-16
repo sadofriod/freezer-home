@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useContext } from 'react';
-import { S3Conf, useS3Source } from '../hooks/useS3Source';
+import {useS3Source, S3Conf } from '../../lib/hooks/useS3Source';
 import { FeatureContext } from './FeaturesContext';
 
 export type VideoType = 'ticket' | 'fruit' | 'info';
@@ -9,14 +9,14 @@ export type VideoType = 'ticket' | 'fruit' | 'info';
 const AutoPlayVideo: React.FC<{
   s3Conf: S3Conf;
 }> = ({ s3Conf }) => {
-  const {currentFeature} = useContext(FeatureContext)
+  const { currentFeature } = useContext(FeatureContext)
 
   const { data: videoSrc, error, isLoading } = useS3Source(
     `freezer-note-home-assest/${currentFeature}.webm`, s3Conf
   );
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading video</div>;
-  
+
   return (
     <div style={{
       border: '10px solid black',

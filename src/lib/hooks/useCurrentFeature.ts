@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
-import { VideoType } from "../components/AutoPlayVideo";
+import { VideoType } from "../../pages/components/AutoPlayVideo";
 
 const video = [
   {

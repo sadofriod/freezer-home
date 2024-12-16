@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, PropsWithChildren, useEffect } from "react";
 import { VideoType } from "./AutoPlayVideo";
-import { useCurrentFeature } from "../hooks/useCurrentFeature";
+import { useCurrentFeature } from "../../lib/hooks/useCurrentFeature";
 
 type FeaturesContextType = {
   currentFeature: VideoType;
@@ -11,9 +11,9 @@ export const FeatureContext = createContext<FeaturesContextType>({
   currentFeature: 'ticket'
 });
 
-export const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
+const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
   const { currentFeature, manualChange } = useCurrentFeature();
-  
+
   const handleClassChange = (e: Event) => {
     const target = e.target as HTMLElement;
     const feature = target.id as VideoType;
@@ -27,7 +27,7 @@ export const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
     });
     document.getElementById(currentFeature)?.classList.add('page-tag-active');
   }, [currentFeature, manualChange]);
-  
+
   useEffect(() => {
     document.querySelectorAll('.page-tag').forEach((feature) => {
       feature.addEventListener('click', handleClassChange);
@@ -45,3 +45,4 @@ export const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
     </FeatureContext.Provider>
   )
 }
+export default FeaturesContext;

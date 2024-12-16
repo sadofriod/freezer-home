@@ -1,14 +1,14 @@
 import AutoPlayVideo from "./components/AutoPlayVideo";
-import { S3Conf } from "./hooks/useS3Source";
+import { S3Conf } from "../lib/hooks/useS3Source";
 import { AnimationBackground } from "./components/AnimationBackground";
-import { FeaturesContext } from "./components/FeaturesContext";
-import { FeaturesList } from "./components/FeaturesList";
+import FeaturesContext from "./components/FeaturesContext";
+import FeaturesList from "./components/FeaturesList";
 import { appWithTranslation, useTranslation } from 'next-i18next';
 import { nextI18nConf } from '../../next-i18n-conf';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { loadEnvConfig } from '@next/env'
 import Image from "next/image";
-import { DiscordIcon } from "./components/DiscordIcon";
+import DiscordIcon from "./components/DiscordIcon";
 
 export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const projectDir = process.cwd()

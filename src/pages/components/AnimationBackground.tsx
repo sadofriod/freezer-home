@@ -51,3 +51,5 @@ export const AnimationBackground = () => {
     </div>
   )
 }
+
+export default AnimationBackground;
