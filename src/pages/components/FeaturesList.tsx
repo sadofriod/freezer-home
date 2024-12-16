@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import AppleIcon from '@mui/icons-material/Apple';
 
-export const FeaturesList: React.FC<{}> = () => {
+export const FeaturesList: React.FC = () => {
   const { t } = useTranslation('common');
   return (
     <div className="feature-container">

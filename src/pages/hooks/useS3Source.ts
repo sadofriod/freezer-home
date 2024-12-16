@@ -57,7 +57,7 @@ export const useS3Source = (filename: string, option: S3Conf) => {
   }
   React.useEffect(() => {
     getURL();
-  }, [filename]);
+  }, [filename]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return { data, error, isLoading };
 }

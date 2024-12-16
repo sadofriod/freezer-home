@@ -22,9 +22,14 @@ export const getServerSideProps = async ({ locale }: { locale: string }) => {
   }
 };
 
+type Props = Awaited<ReturnType<typeof getServerSideProps>>['props'] & {
+  NEXT_REGION: string;
+  NEXT_BUCKET_NAME: string;
+  NEXT_ACCESS_KEY_ID: string;
+  NEXT_SECRET_ACCESS: string;
+}
 
-
-function Home(props: any) {
+function Home(props: Props) {
   const { t } = useTranslation('common');
 
   const s3Conf: S3Conf = {
@@ -67,4 +72,4 @@ function Home(props: any) {
   );
 }
 
-export default appWithTranslation(Home);
+export default appWithTranslation(Home as any); //eslint-disable-line

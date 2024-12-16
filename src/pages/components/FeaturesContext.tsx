@@ -26,18 +26,18 @@ export const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
       feature.classList.remove('page-tag-active');
     });
     document.getElementById(currentFeature)?.classList.add('page-tag-active');
-  }, [currentFeature])
+  }, [currentFeature, manualChange]);
   
   useEffect(() => {
     document.querySelectorAll('.page-tag').forEach((feature) => {
       feature.addEventListener('click', handleClassChange);
     });
-    () => {
+    () => { // eslint-disable-line  @typescript-eslint/no-unused-expressions
       document.querySelectorAll('.page-tag').forEach((feature) => {
         feature.removeEventListener('click', handleClassChange);
       });
     }
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <FeatureContext.Provider value={{ currentFeature: currentFeature }}>

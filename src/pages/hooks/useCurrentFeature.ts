@@ -55,7 +55,7 @@ export const useCurrentFeature = () => {
 
   useEffect(() => {
     handleAutoTypeChange();
-  }, []);
+  }, []);//eslint-disable-line react-hooks/exhaustive-deps
 
   return { currentFeature, manualChange };
 
