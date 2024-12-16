@@ -1,0 +1,16 @@
+{
+  "title": "Freezer Note",
+  "subtitle1": "The AI-based recognition APP provides more accurate data on shelf life,",
+  "subtitle2": "preservation methods, and production dates, derived from shopping tickets, food packaging, and actual fruit photos.",
+  "subtitle3": "And remind you date",
+  "feature": {
+    "title": "Features",
+    "subtitle1": "Faster recognition based on device-side AI",
+    "subtitle2": "Extract data from multiple sources",
+    "subtitle3": "Reduce user input and improve user experience",
+    "tab1": "Create by Ticket",
+    "tab2": "Create by fruit Photo",
+    "tab3": "Create by food information",
+    "download": "Download"
+  }
+}

@@ -1,0 +1,40 @@
+.float-background{
+  animation: float-background-animation 3s infinite ease-in-out;
+  display: flex;
+}
+
+.background-loading  {
+  left: 0vw;
+  transition: left 3s;
+}
+@keyframes float-background-animation {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes background-loading {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-20vw);
+  }
+}
+
+@keyframes title-ease-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
