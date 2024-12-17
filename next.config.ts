@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactStrictMode: true,
   i18n: nextI18nConf.i18n,
-  distDir: 'build',
   async rewrites() {
     return [
       {
