@@ -1,0 +1,35 @@
+name: Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install pnpm
+        run: npm install --global pnpm
+      - name: Install dependencies
+        run: pnpm install
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo NEXT_BUCKET_NAME=${{secrets.NEXT_BUCKET_NAME}} >> .env
+          echo NEXT_REGION=${{secrets.NEXT_REGION}} >> .env
+          echo NEXT_ACCESS_KEY_ID=${{secrets.NEXT_ACCESS_KEY_ID}} >> .env
+          echo NEXT_SECRET_ACCESS_KEY=${{secrets.NEXT_SECRET_ACCESS}} >> .env
+          cat .env
+      - name: Build
+        run: pnpm run build
+      - name: Deploy to server
+        uses: easingthemes/ssh-deploy@main
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.ASHES }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          REMOTE_PORT: 22
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          TARGET: ~/freezer-home
+          EXCLUDE: .git/ node_modules/
+          SOURCE: build nginx.conf

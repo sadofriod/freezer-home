@@ -5,14 +5,16 @@ import { useCurrentFeature } from "../../lib/hooks/useCurrentFeature";
 
 type FeaturesContextType = {
   currentFeature: VideoType;
+  setIsEnd: (end: boolean) => void;
 };
 
 export const FeatureContext = createContext<FeaturesContextType>({
-  currentFeature: 'ticket'
+  currentFeature: 'ticket',
+  setIsEnd: () => { console.log('setIsEnd not implemented') },
 });
 
 const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
-  const { currentFeature, manualChange } = useCurrentFeature();
+  const { currentFeature, manualChange, setIsEnd } = useCurrentFeature();
 
   const handleClassChange = (e: Event) => {
     const target = e.target as HTMLElement;
@@ -21,12 +23,11 @@ const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
   }
 
   useEffect(() => {
-    manualChange(currentFeature)
     document.querySelectorAll('.page-tag').forEach((feature) => {
       feature.classList.remove('page-tag-active');
     });
     document.getElementById(currentFeature)?.classList.add('page-tag-active');
-  }, [currentFeature, manualChange]);
+  }, [currentFeature]);
 
   useEffect(() => {
     document.querySelectorAll('.page-tag').forEach((feature) => {
@@ -40,7 +41,7 @@ const FeaturesContext: React.FC<PropsWithChildren> = (props) => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <FeatureContext.Provider value={{ currentFeature: currentFeature }}>
+    <FeatureContext.Provider value={{ currentFeature, setIsEnd }}>
       {props.children}
     </FeatureContext.Provider>
   )

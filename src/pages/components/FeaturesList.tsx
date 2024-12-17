@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next";
-import AppleIcon from '@mui/icons-material/Apple';
+import MUIAppleIcon from '@mui/icons-material/Apple';
 
 const FeaturesList: React.FC = () => {
   const { t } = useTranslation('common');
@@ -8,7 +8,7 @@ const FeaturesList: React.FC = () => {
       <div>
         <h2 className="feature-title">{t('feature.download')}</h2>
         <a className="download-button" href="https://apps.apple.com/cn/app/freezernote/id6689519241?l=en-GB">
-          <AppleIcon />
+          <MUIAppleIcon />
           Apple Store
         </a>
       </div>

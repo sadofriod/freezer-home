@@ -22,41 +22,26 @@ export type ManualChange = (type: VideoType) => void;
 
 export const useCurrentFeature = () => {
   const [currentFeature, setCurrentFeature] = useState<VideoType>(video[0].type as VideoType);
-  const [timer, setTimer] = useState<number>(NaN);
-  const handleAutoTypeChange = (currentIndex = 0) => {
-    if (!isNaN(timer)) {
-      window.clearTimeout(timer);
-    }
-    
-    setCurrentFeature(video[currentIndex].type as VideoType);
-    
-    const newTimer = window.setTimeout(() => {
-      const nextIndex = currentIndex + 1;
-      if (nextIndex >= video.length) {
-        handleAutoTypeChange(0);
-      } else {
-        console.log(video[nextIndex].type);
-        
-        handleAutoTypeChange(nextIndex);
-      }
-    }, video[currentIndex].duration);
-    setTimer(newTimer);
+  const [isEnd, setIsEnd] = useState<boolean>(false);
+
+  const handleAutoTypeChange = (nextIndex: number) => {    
+    setCurrentFeature(video[nextIndex].type as VideoType);
   };
 
   const manualChange = (type: VideoType) => {
-    if (!isNaN(timer)) {
-      window.clearTimeout(timer);
-    }
     const index = video.findIndex(v => v.type === type);
     if (index === -1) return;
     setCurrentFeature(video[index].type as VideoType);
-    handleAutoTypeChange(index);
   };
 
   useEffect(() => {
-    handleAutoTypeChange();
-  }, []);//eslint-disable-line react-hooks/exhaustive-deps
+    if (isEnd) {
+      const currentFeatureIndex = video.findIndex(v => v.type === currentFeature);
+      const nextIndex = currentFeatureIndex + 1 >= video.length ? 0 : currentFeatureIndex + 1;
+      handleAutoTypeChange(nextIndex);
+    }
+  }, [isEnd]);//eslint-disable-line react-hooks/exhaustive-deps
 
-  return { currentFeature, manualChange };
+  return { currentFeature, manualChange, setIsEnd: (end: boolean) => setIsEnd(end) };
 
 };
