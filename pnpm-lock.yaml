@@ -41,6 +41,9 @@ dependencies:
   next-i18next:
     specifier: ^15.4.0
     version: 15.4.0(i18next@24.1.0)(next@15.1.0)(react-i18next@15.2.0)(react@19.0.0)
+  nextjs-google-analytics:
+    specifier: ^2.3.7
+    version: 2.3.7(next@15.1.0)(react@19.0.0)
   react:
     specifier: ^19.0.0
     version: 19.0.0
@@ -3151,6 +3154,14 @@ packages:
       is-callable: 1.2.7
     dev: true
 
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: false
+    optional: true
+
   /function-bind@1.1.2:
     resolution: {integrity: sha512-7XHNxH7qX9xG5mIwxkhumTox/MIRNcOgDrxWsMt2pAr23WHp6MrRlN7FBSFpCpr+oVO0F744iUgR82nJMfG2SA==}
 
@@ -3786,6 +3797,18 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nextjs-google-analytics@2.3.7(next@15.1.0)(react@19.0.0):
+    resolution: {integrity: sha512-kuE5OcqmAg1qh9J6LskoDLybj8WmLyfxD+KsVGGvRe5zZg6bGQ/QM/1/7TdJq/u7hIeVqFqcloadD0pcosRXUw==}
+    peerDependencies:
+      next: '>=11.0.0'
+      react: '>=17.0.0'
+    dependencies:
+      next: 15.1.0(react-dom@19.0.0)(react@19.0.0)
+      react: 19.0.0
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: false
 
   /object-assign@4.1.1:

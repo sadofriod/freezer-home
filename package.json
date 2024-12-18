@@ -24,6 +24,7 @@
     "lru-cache": "^11.0.2",
     "next": "15.1.0",
     "next-i18next": "^15.4.0",
+    "nextjs-google-analytics": "^2.3.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
