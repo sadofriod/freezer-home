@@ -9,6 +9,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { loadEnvConfig } from '@next/env'
 import Image from "next/image";
 import DiscordIcon from "./components/DiscordIcon";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 export const getServerSideProps = async ({ locale }: { locale: string }) => {
   const projectDir = process.cwd()
@@ -40,6 +41,8 @@ function Home(props: Props) {
   };
 
   return (
+    <>
+    <GoogleTagManager gtmId="GTM-N4SNL37C" />
     <div className="app-container">
       <div className="mobile-top-banner" />
       <Image className="home-logo" src="/logo.png" alt="logo" width={100} height={100} />
@@ -69,6 +72,7 @@ function Home(props: Props) {
         Contact Us
       </a>
     </div>
+    </>
   );
 }
 

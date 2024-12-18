@@ -1,13 +1,17 @@
 import { useTranslation } from "next-i18next";
 import MUIAppleIcon from '@mui/icons-material/Apple';
+import { sendGTMEvent } from '@next/third-parties/google'
 
 const FeaturesList: React.FC = () => {
   const { t } = useTranslation('common');
+
   return (
     <div className="feature-container">
       <div>
         <h2 className="feature-title">{t('feature.download')}</h2>
-        <a className="download-button" href="https://apps.apple.com/cn/app/freezernote/id6689519241?l=en-GB">
+        <a id="freezer_note_download" onClick={()=> sendGTMEvent({
+          trigger: 'download',
+        },'freezer_note_download')} className="download-button" href="https://apps.apple.com/cn/app/freezernote/id6689519241?l=en-GB">
           <MUIAppleIcon />
           Apple Store
         </a>
